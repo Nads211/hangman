@@ -31,6 +31,7 @@ class Hangman:
                 if letter==guess:
                     position = self.word.index(letter)
                     self.word_guessed[position] = guess
+            print(self.word_guessed)
             self.num_letters -= 1
         else:
             print(f"Sorry, {guess} is not in the word. Try again.")
@@ -49,8 +50,9 @@ class Hangman:
             else:   
                 #check if guess is in word
                 self.check_guess(guess)
+                self.list_of_guesses.append(guess)
 
-word_list = ['apple', 'pear', 'orange', 'banana', 'grapes']
+word_list = ['apple', 'pear']#, 'orange', 'banana', 'grapes']
 
 #hangman = Hangman(word_list)
 #hangman.ask_for_input()
@@ -60,11 +62,11 @@ def play_game(word_list):
     num_lives = 5
     game = Hangman(word_list, num_lives)
     while True:
-        if num_lives == 0:
+        if game.num_lives == 0:
             print('You lost')
-        elif num_letters > 0:
+        elif game.num_letters > 0:
             game.ask_for_input()
         else:
             print('Congratz, you won')
 
-play_game()
+play_game(word_list)
