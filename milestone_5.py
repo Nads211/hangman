@@ -45,11 +45,23 @@ class Hangman:
         self.num_lives = num_lives
         self.word_list = word_list
         self.list_of_guesses = []
+        print(f"The mystery word has {self.num_letters} characters")
+        print(self.word_guessed)
     
 
     #function to check if the guessed letter is in the chosen word
     def check_guess(self, guess):
-        
+        '''
+        Checks if the letter is in the word.
+        If it is, it replaces the '_' in the word_guessed list with the letter.
+        If it is not, it reduces the number of lives by 1.
+
+        Parameters:
+        ----------
+        letter: str
+            The letter to be checked
+
+        '''
         guess = guess.lower()       
         
         if guess in self.word:
@@ -72,7 +84,7 @@ class Hangman:
             self.num_lives -= 1
 
             #print message to user
-            print(f"Sorry, {guess} is not in the word. Try again.")
+            print(f"Sorry, {guess} is not in the word.")
             print(f"You have {self.num_lives} lives left")
     
 
@@ -92,7 +104,7 @@ class Hangman:
 
             #check if guess has been tried before
             elif guess in self.list_of_guesses:
-                print(f"You already tried {guess}!")
+                print(f"You already tried that letter!")
                 continue
 
             #add guess to list of guesses and run check_guess method
@@ -111,7 +123,7 @@ def play_game(word_list):
     #game logic
     while True:
         if game.num_lives == 0:
-            print('You lost')
+            print(f"You lost! The word was {game.word}")
         elif game.num_letters > 0:
             game.ask_for_input()
             continue
@@ -122,5 +134,5 @@ def play_game(word_list):
 
 #play the game
 if __name__ == '__main__':
-    word_list = ['apple', 'pear', 'orange', 'banana', 'grapes']
+    word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
     play_game(word_list)
